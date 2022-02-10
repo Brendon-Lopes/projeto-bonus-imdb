@@ -1,5 +1,7 @@
 const KEY = 'k_mye57d2o';
 
+const burgerBtn = document.querySelector('.burger-icon');
+
 const requestOptions = {
   method: 'GET',
   redirect: 'follow'
@@ -16,4 +18,8 @@ const fetchAPI = async (genres, count) => {
   }
 }
 
-fetchAPI('action,adventure', '15');
+fetchAPI('action,adventure', '15'); // testando a API
+
+burgerBtn.addEventListener('click', () => {
+  burgerBtn.classList.toggle('change');
+})
