@@ -1,0 +1,23 @@
+{
+  "name": "projeto-bonus-imdb",
+  "version": "1.0.0",
+  "description": "Projeto bônus do fim do módulo de fundamentos.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brendon-Lopes/projeto-bonus-imdb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brendon-Lopes/projeto-bonus-imdb/issues"
+  },
+  "homepage": "https://github.com/Brendon-Lopes/projeto-bonus-imdb#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
