@@ -45,3 +45,38 @@ header {
 .change .bar3 {
   transform: rotate(45deg) translate(-8px, -8px);
 }
+
+main {
+  display: flex;
+  color: white;
+}
+
+#genre-section {
+  width: 50%;
+}
+
+#genre-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.genre-item {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 20px;
+  margin: 5px;
+  border-radius: 25px;
+  background-color: #131834;
+}
+
+.movie-pic {
+  width: 150px;
+  float: left;
+  margin-right: 20px;
+}
+
+#movies-section {
+  width: 50%;
+}
