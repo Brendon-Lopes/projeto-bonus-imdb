@@ -1,8 +1,8 @@
-const KEY1 = 'k_mye57d2o';
+// const KEY1 = 'k_mye57d2o';
 // Fazer função para alternar entre as chaves ou trocar manualmente?
-// const KEY2 = 'k_24fzarfk';
+// const KEY1 = 'k_24fzarfk';
 
-// const KEY3 = 'k_xj52n88c';
+const KEY1 = 'k_xj52n88c';
 
 const burgerBtn = document.querySelector('.burger-icon');
 
@@ -30,7 +30,8 @@ const fetchAPITrailer = async (filme) => {
     const URLTRAILER = `https://imdb-api.com/en/API/Trailer/k_24fzarfk/${filme}`;
     const response = await fetch(URLTRAILER, requestOptions);
     const data = await response.json();
-    console.log(data);
+    const link = data.link;
+    return link;
   } catch (error) {
     console.log(error);
   }
@@ -63,13 +64,18 @@ const displayItems = (array) => {
     synopsis.className = 'plot';
     synopsis.innerText = element.plot;
 
+    const trailerLink = document.createElement('a');
+    trailerLink.innerText = 'Trailer';
+    trailerLink.href = element.link;
+    trailerLink.target = '_blank';
+
     newSection.appendChild(image);
     newSection.appendChild(movieName);
     newSection.appendChild(rating);
     newSection.appendChild(synopsis);
+    newSection.appendChild(trailerLink);
     movieSection.appendChild(newSection);
   });
-
 }
 
 const top10 = async () => {
@@ -95,7 +101,10 @@ const filterResults = async (event) => {
   const title = `The best of ${genre}`;
   movieSection.innerHTML = `<h2 class="title-movies">${title}</h2>`;
   const { results } = await fetchAPI( 'top_250', genre);
-  const newArray = results.map(( {id, imDbRating, image, plot, title} ) => ({id, imDbRating, image, plot, title}));
+  const newArray = results.map( ( {id, imDbRating, image, plot, title} ) => {
+    return { id, imDbRating, image, plot, title };
+  });
+  console.log(newArray);
   const sortedArray = newArray.sort((a, b) => b.imDbRating - a.imDbRating);
   displayItems(sortedArray);
 }
