@@ -24,6 +24,7 @@ header {
 .burger-icon {
   margin-left: 1em;
   cursor: pointer;
+  transition: all 0.5s ease;
 }
 
 .bar1, .bar2, .bar3 {
@@ -49,6 +50,25 @@ header {
 main {
   display: flex;
   color: white;
+}
+
+#inputSearch {
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  margin: 20px 50px;
+  padding: 5px 0 5px 20px;
+  box-sizing: border-box;
+  border: none;
+}
+
+i {
+  font-size: 25px;
+  position: absolute;
+  left: 230px;
+  top: 115px;
+  color: teal;
+  fill: teal;
 }
 
 #genre-section {
