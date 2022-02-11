@@ -41,7 +41,7 @@ burgerBtn.addEventListener('click', () => {
 })
 
 const displayItems = (array) => {
-  array.forEach((element) => {
+  array.forEach((element, index) => {
     const movieSection = document.querySelector('#movies-section');
     const newSection = document.createElement('section');
     newSection.className = 'section movie-section';
@@ -53,7 +53,7 @@ const displayItems = (array) => {
 
     const movieName = document.createElement('h2');
     movieName.className = 'title';
-    movieName.innerText = element.title;
+    movieName.innerText = `${index+1}. ${element.title}`;
 
     const rating = document.createElement('h3');
     rating.className = 'imdb';
@@ -73,6 +73,8 @@ const displayItems = (array) => {
 }
 
 const top10 = async () => {
+  const movieSection = document.querySelector('#movies-section');
+  movieSection.innerHTML = '<h2 class="title-movies">Top 10</h2>';
   const { results } = await fetchAPI('top_100');
   const sortedArray = results.sort((a, b) => b.imDbRating - a.imDbRating);
   const top = sortedArray.filter((element, index) => {
@@ -81,8 +83,17 @@ const top10 = async () => {
   displayItems(top);
 } 
 
-const results = async (event) => {
+const clearMovies = () => {
+  const movieSection = document.querySelector('#movies-section');
+  movieSection.innerHTML = '';
+}
+
+const filterResults = async (event) => {
+  clearMovies();
   const genre = event.target.innerText;
+  const movieSection = document.querySelector('#movies-section');
+  const title = `The best of ${genre}`;
+  movieSection.innerHTML = `<h2 class="title-movies">${title}</h2>`;
   const { results } = await fetchAPI( 'top_250', genre);
   const newArray = results.map(( {id, imDbRating, image, plot, title} ) => ({id, imDbRating, image, plot, title}));
   const sortedArray = newArray.sort((a, b) => b.imDbRating - a.imDbRating);
@@ -90,7 +101,7 @@ const results = async (event) => {
 }
 
 const allItems = document.querySelector('#genre-list');
-allItems.addEventListener('click', results);
+allItems.addEventListener('click', filterResults);
 
 window.onload = async () => {
   await top10();

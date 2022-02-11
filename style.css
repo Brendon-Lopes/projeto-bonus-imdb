@@ -138,6 +138,7 @@ i {
 
 .title-movies {
   font-family: 'Courier New', Courier, monospace;
+  color: #dedede !important;
   font-weight: 600;
   font-size: 2em;
   width: 100%;
