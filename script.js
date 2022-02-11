@@ -18,8 +18,6 @@ const fetchAPI = async (genres, count) => {
   }
 }
 
-fetchAPI('action,adventure', '15'); // testando a API
-
 burgerBtn.addEventListener('click', () => {
   burgerBtn.classList.toggle('change');
 })
