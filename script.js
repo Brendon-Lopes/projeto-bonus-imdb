@@ -11,7 +11,7 @@ const requestOptions = {
   redirect: 'follow'
 };
 
-const fetchAPI = async (genres, groups) => {
+const fetchAPI = async (groups, genres) => {
   try {
     const URL = `https://imdb-api.com/API/AdvancedSearch/${KEY1}/?genres=${genres}&groups=${groups}`;
     const response = await fetch(URL, requestOptions);
@@ -41,10 +41,10 @@ burgerBtn.addEventListener('click', () => {
 })
 
 const displayItems = (array) => {
-  array.forEach(element => {
+  array.forEach((element) => {
     const movieSection = document.querySelector('#movies-section');
     const newSection = document.createElement('section');
-    newSection.className = 'section';
+    newSection.className = 'section movie-section';
 
     const image = document.createElement('img');
     image.className = 'movie-pic';
@@ -72,13 +72,26 @@ const displayItems = (array) => {
 
 }
 
-const allItems = document.querySelector('#genre-list');
-allItems.addEventListener('click', async (event) => {
+const top10 = async () => {
+  const { results } = await fetchAPI('top_100');
+  const sortedArray = results.sort((a, b) => b.imDbRating - a.imDbRating);
+  const top = sortedArray.filter((element, index) => {
+    if (index <= 9) return element;
+  })
+  displayItems(top);
+} 
+
+const results = async (event) => {
   const genre = event.target.innerText;
-  const { results } = await fetchAPI(genre, 'top_250');
+  const { results } = await fetchAPI( 'top_250', genre);
   const newArray = results.map(( {id, imDbRating, image, plot, title} ) => ({id, imDbRating, image, plot, title}));
   const sortedArray = newArray.sort((a, b) => b.imDbRating - a.imDbRating);
   displayItems(sortedArray);
-})
+}
 
-// fetchAPI('action', 2);
+const allItems = document.querySelector('#genre-list');
+allItems.addEventListener('click', results);
+
+window.onload = async () => {
+  await top10();
+}

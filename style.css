@@ -124,5 +124,22 @@ i {
 }
 
 #movies-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-top: 2em; 
   width: 70%;
+}
+
+.movie-section {
+  background-color: rgb(49, 51, 71);
+  border-radius: 10px;
+}
+
+.title-movies {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 2em;
+  width: 100%;
+  text-align: center;
 }
