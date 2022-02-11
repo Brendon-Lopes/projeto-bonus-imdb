@@ -1,6 +1,8 @@
 const KEY1 = 'k_mye57d2o';
 // Fazer função para alternar entre as chaves ou trocar manualmente?
-const KEY2 = 'k_24fzarfk';
+// const KEY2 = 'k_24fzarfk';
+
+// const KEY3 = 'k_xj52n88c';
 
 const burgerBtn = document.querySelector('.burger-icon');
 
@@ -9,11 +11,12 @@ const requestOptions = {
   redirect: 'follow'
 };
 
-const fetchAPI = async (genres, count) => {
+const fetchAPI = async (genres, groups) => {
   try {
-    const URL = `https://imdb-api.com/API/AdvancedSearch/${KEY1}/?genres=${genres}&count=${count}`;
+    const URL = `https://imdb-api.com/API/AdvancedSearch/${KEY1}/?genres=${genres}&groups=${groups}`;
     const response = await fetch(URL, requestOptions);
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -36,3 +39,46 @@ const fetchAPITrailer = async (filme) => {
 burgerBtn.addEventListener('click', () => {
   burgerBtn.classList.toggle('change');
 })
+
+const displayItems = (array) => {
+  array.forEach(element => {
+    const movieSection = document.querySelector('#movies-section');
+    const newSection = document.createElement('section');
+    newSection.className = 'section';
+
+    const image = document.createElement('img');
+    image.className = 'movie-pic';
+    image.src = element.image;
+    image.alt = `${element.title} picture`;
+
+    const movieName = document.createElement('h2');
+    movieName.className = 'title';
+    movieName.innerText = element.title;
+
+    const rating = document.createElement('h3');
+    rating.className = 'imdb';
+    rating.innerText = `IMDB: ${element.imDbRating}`;
+
+    const synopsis = document.createElement('p');
+    synopsis.className = 'plot';
+    synopsis.innerText = element.plot;
+
+    newSection.appendChild(image);
+    newSection.appendChild(movieName);
+    newSection.appendChild(rating);
+    newSection.appendChild(synopsis);
+    movieSection.appendChild(newSection);
+  });
+
+}
+
+const allItems = document.querySelector('#genre-list');
+allItems.addEventListener('click', async (event) => {
+  const genre = event.target.innerText;
+  const { results } = await fetchAPI(genre, 'top_250');
+  const newArray = results.map(( {id, imDbRating, image, plot, title} ) => ({id, imDbRating, image, plot, title}));
+  const sortedArray = newArray.sort((a, b) => b.imDbRating - a.imDbRating);
+  displayItems(sortedArray);
+})
+
+// fetchAPI('action', 2);

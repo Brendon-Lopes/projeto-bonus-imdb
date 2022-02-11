@@ -91,7 +91,7 @@ i {
   width: 50%;
 }
 
-#genre-items {
+#genre-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
