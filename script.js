@@ -1,6 +1,9 @@
 // const KEY1 = 'k_mye57d2o';
 // Fazer função para alternar entre as chaves ou trocar manualmente?
 // const KEY1 = 'k_24fzarfk';
+const burgerEvent = document.querySelector('.burger-icon');
+const board = document.querySelector('.board');
+const mainSelect = document.querySelector('.main');
 
 const KEY1 = 'k_xj52n88c';
 
@@ -104,13 +107,27 @@ const filterResults = async (event) => {
   const newArray = results.map( ( {id, imDbRating, image, plot, title} ) => {
     return { id, imDbRating, image, plot, title };
   });
-  console.log(newArray);
   const sortedArray = newArray.sort((a, b) => b.imDbRating - a.imDbRating);
   displayItems(sortedArray);
 }
 
 const allItems = document.querySelector('#genre-list');
 allItems.addEventListener('click', filterResults);
+
+const showMenu = () => {
+  if (!board.classList.contains('boardAtivo')) {
+    board.style.display = 'flex';
+    mainSelect.style['justify-content'] = 'space-between';
+    board.classList.add('boardAtivo');
+    board.style.transition = 'all 0.5s ease';
+  } else {
+    board.style.display = 'none';
+    mainSelect.style['justify-content'] = 'center';
+    board.classList.remove('boardAtivo');
+  }
+}
+
+burgerEvent.addEventListener('click', showMenu);
 
 window.onload = async () => {
   await top10();
