@@ -1,11 +1,11 @@
 // const KEY1 = 'k_mye57d2o';
 // Fazer função para alternar entre as chaves ou trocar manualmente?
 // const KEY1 = 'k_24fzarfk';
+const KEY1 = 'k_xj52n88c';
 const burgerEvent = document.querySelector('.burger-icon');
 const board = document.querySelector('.board');
 const mainSelect = document.querySelector('.main');
 
-const KEY1 = 'k_xj52n88c';
 
 const burgerBtn = document.querySelector('.burger-icon');
 
@@ -19,7 +19,6 @@ const fetchAPI = async (groups, genres) => {
     const URL = `https://imdb-api.com/API/AdvancedSearch/${KEY1}/?genres=${genres}&groups=${groups}`;
     const response = await fetch(URL, requestOptions);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
