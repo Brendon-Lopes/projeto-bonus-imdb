@@ -6,38 +6,12 @@ const burgerEvent = document.querySelector('.burger-icon');
 const board = document.querySelector('.board');
 const mainSelect = document.querySelector('.main');
 
-
 const burgerBtn = document.querySelector('.burger-icon');
 
 const requestOptions = {
   method: 'GET',
   redirect: 'follow'
 };
-
-const fetchAPI = async (groups, genres) => {
-  try {
-    const URL = `https://imdb-api.com/API/AdvancedSearch/${KEY1}/?genres=${genres}&groups=${groups}`;
-    const response = await fetch(URL, requestOptions);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-// imDbId: "tt1375666" - Exemplo ID do filme;
-// Acessar "link": "https://www.imdb.com/video/vi2959588889" no mesmo objeto;
-const fetchAPITrailer = async (filme) => {
-  try {
-    const URLTRAILER = `https://imdb-api.com/en/API/Trailer/k_24fzarfk/${filme}`;
-    const response = await fetch(URLTRAILER, requestOptions);
-    const data = await response.json();
-    const link = data.link;
-    return link;
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 const createTrailer = async (section) => {
   const idMovie = section.id;
@@ -68,7 +42,7 @@ const displayItems = (array) => {
 
     const movieName = document.createElement('h2');
     movieName.className = 'title';
-    movieName.innerText = `${index+1}. ${element.title}`;
+    movieName.innerText = `${index + 1}. ${element.title}`;
 
     const rating = document.createElement('h3');
     rating.className = 'imdb';
@@ -97,7 +71,7 @@ const top10 = async () => {
   displayItems(top);
   const cardMovies = document.querySelectorAll('.movie-section');
   cardMovies.forEach(async (element) => await createTrailer(element));
-} 
+}
 
 const clearMovies = () => {
   const movieSection = document.querySelector('#movies-section');
@@ -110,8 +84,8 @@ const filterResults = async (event) => {
   const movieSection = document.querySelector('#movies-section');
   const title = `The best of ${genre}`;
   movieSection.innerHTML = `<h2 class="title-movies">${title}</h2>`;
-  const { results } = await fetchAPI( 'top_250', genre);
-  const newArray = results.map( ( {id, imDbRating, image, plot, title} ) => {
+  const { results } = await fetchAPI('top_250', genre);
+  const newArray = results.map(({ id, imDbRating, image, plot, title }) => {
     return { id, imDbRating, image, plot, title };
   });
   const sortedArray = newArray.sort((a, b) => b.imDbRating - a.imDbRating);
