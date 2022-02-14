@@ -39,6 +39,17 @@ const fetchAPITrailer = async (filme) => {
   }
 }
 
+const createTrailer = async (section) => {
+  const idMovie = section.id;
+  const linkMovie = document.createElement('a');
+  linkMovie.className = 'trailer';
+  linkMovie.innerText = 'Trailer';
+  linkMovie.target = '_blank';
+  const url = await fetchAPITrailer(idMovie);
+  linkMovie.href = url;
+  section.appendChild(linkMovie);
+}
+
 burgerBtn.addEventListener('click', () => {
   burgerBtn.classList.toggle('change');
 })
@@ -48,6 +59,7 @@ const displayItems = (array) => {
     const movieSection = document.querySelector('#movies-section');
     const newSection = document.createElement('section');
     newSection.className = 'section movie-section';
+    newSection.id = element.id;
 
     const image = document.createElement('img');
     image.className = 'movie-pic';
@@ -66,16 +78,10 @@ const displayItems = (array) => {
     synopsis.className = 'plot';
     synopsis.innerText = element.plot;
 
-    const trailerLink = document.createElement('a');
-    trailerLink.innerText = 'Trailer';
-    trailerLink.href = element.link;
-    trailerLink.target = '_blank';
-
     newSection.appendChild(image);
     newSection.appendChild(movieName);
     newSection.appendChild(rating);
     newSection.appendChild(synopsis);
-    newSection.appendChild(trailerLink);
     movieSection.appendChild(newSection);
   });
 }
@@ -89,6 +95,8 @@ const top10 = async () => {
     if (index <= 9) return element;
   })
   displayItems(top);
+  const cardMovies = document.querySelectorAll('.movie-section');
+  cardMovies.forEach(async (element) => await createTrailer(element));
 } 
 
 const clearMovies = () => {
@@ -108,6 +116,8 @@ const filterResults = async (event) => {
   });
   const sortedArray = newArray.sort((a, b) => b.imDbRating - a.imDbRating);
   displayItems(sortedArray);
+  const cardMovies = document.querySelectorAll('.movie-section');
+  cardMovies.forEach(async (element) => await createTrailer(element));
 }
 
 const allItems = document.querySelector('#genre-list');
