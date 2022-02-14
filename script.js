@@ -1,7 +1,7 @@
 // const KEY1 = 'k_mye57d2o';
 // Fazer função para alternar entre as chaves ou trocar manualmente?
-// const KEY1 = 'k_24fzarfk';
-const KEY1 = 'k_xj52n88c';
+const KEY1 = 'k_24fzarfk';
+// const KEY1 = 'k_xj52n88c';
 const burgerEvent = document.querySelector('.burger-icon');
 const board = document.querySelector('.board');
 const mainSelect = document.querySelector('.main');
@@ -46,7 +46,7 @@ const displayItems = (array) => {
 
     const rating = document.createElement('h3');
     rating.className = 'imdb';
-    rating.innerText = `IMDB: ${element.imDbRating}`;
+    rating.innerHTML = `IMDB: ${element.imDbRating} &#9733`;
 
     const synopsis = document.createElement('p');
     synopsis.className = 'plot';
